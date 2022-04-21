@@ -12,6 +12,7 @@ class SpotifyObject:
     scope = "user-library-read user-read-recently-played user-top-read playlist-read-private playlist-modify-public playlist-modify-private"
     client_id = os.environ.get('CLIENT_ID')
     client_secret = os.environ.get('CLIENT_SECRET')
+    client_redirect_uri = os.environ.get('REDIRECT_URI')
 
     @staticmethod
     def get_spotify_object():
@@ -20,7 +21,8 @@ class SpotifyObject:
                 scope=SpotifyObject.scope,
                 client_id=SpotifyObject.client_id,
                 client_secret=SpotifyObject.client_secret,
-                redirect_uri='http://localhost:4000/callback')
+                redirect_uri=SpotifyObject.client_redirect_uri)
+                # redirect_uri='http://localhost:4000/callback')
         )
         return sp_object
 
