@@ -38,7 +38,7 @@ class WeeklyPlaylist(object):
 
     def get_saved_tracks(self):
         my_saved_tracks = self.sp.current_user_saved_tracks()
-        saved_track_list = [track['id'] for track in my_saved_tracks['items']]
+        saved_track_list = [track['track']['id'] for track in my_saved_tracks['items']]
         return saved_track_list
 
     def get_recently_played(self):
