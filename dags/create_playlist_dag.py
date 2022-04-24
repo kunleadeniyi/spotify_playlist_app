@@ -159,23 +159,24 @@ with DAG('spotify_dag',
     create or replace playlist - user_id, unpacked_track_ids, playlist_name
     """
 
-    # get_user_id >> [get_top_artists, get_top_tracks, get_saved_songs, get_rec_played_songs]
-    # get_top_artists >> get_seed_top_artists
-    # get_top_tracks >> get_seed_top_tracks
+    get_user_id >> [get_top_artists, get_top_tracks, get_saved_songs, get_rec_played_songs]
+    get_top_artists >> get_seed_top_artists
+    get_top_tracks >> get_seed_top_tracks
 
-    # get_saved_songs >> get_seed_saved_songs
-    # get_rec_played_songs >> get_seed_rec_played
+    get_saved_songs >> get_seed_saved_songs
+    get_rec_played_songs >> get_seed_rec_played
 
-    # get_seed_saved_songs >> rec_from_saved_songs
-    # [get_seed_top_artists, get_seed_top_tracks] >> rec_from_top_songs
-    # get_seed_rec_played >> rec_from_rec_played
+    get_seed_saved_songs >> rec_from_saved_songs
+    [get_seed_top_artists, get_seed_top_tracks] >> rec_from_top_songs
+    get_seed_rec_played >> rec_from_rec_played
 
-    # [rec_from_rec_played, rec_from_top_songs, rec_from_saved_songs] >> get_playlist_tracks
+    [rec_from_rec_played, rec_from_top_songs, rec_from_saved_songs] >> get_playlist_tracks
 
-    # get_playlist_tracks >> create_playlist
+    get_playlist_tracks >> create_playlist
 
     # The top is the correct one -- make it work
     
+    """
     get_user_id >> [get_top_artists, get_top_tracks, get_rec_played_songs]
     get_top_artists >> get_seed_top_artists
     get_top_tracks >> get_seed_top_tracks
@@ -190,3 +191,4 @@ with DAG('spotify_dag',
     [rec_from_rec_played, rec_from_top_songs] >> get_playlist_tracks
 
     get_playlist_tracks >> create_playlist
+    """
