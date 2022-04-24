@@ -21,7 +21,8 @@ class SpotifyObject:
                 scope=SpotifyObject.scope,
                 client_id=SpotifyObject.client_id,
                 client_secret=SpotifyObject.client_secret,
-                redirect_uri=SpotifyObject.client_redirect_uri)
+                redirect_uri=SpotifyObject.client_redirect_uri
+                )
                 # redirect_uri='http://localhost:4000/callback')
         )
         return sp_object
@@ -192,3 +193,8 @@ class WeeklyPlaylist(object):
             new_playlist_id = new_playlist['id']
             built_playlist = self.sp.playlist_add_items(playlist_id=new_playlist_id, items=track_ids_list)
             return built_playlist
+
+
+# sp = SpotifyObject.get_spotify_object()
+# weekly_playlist = WeeklyPlaylist(sp)
+# print(weekly_playlist.get_current_user_id())
